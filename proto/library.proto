@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api;
+option go_package = "./librarypb";
+/* 
+********** books **********
+*/
+service Books {
+    rpc GetBooksByAuthor(AuthorEntity) returns (GetBooksByAuthorResponse){}
+
+}
+
+message BookEntity{
+    int32 id = 1;
+    string name = 2;
+    int32 authorID = 3;
+}
+
+message GetBooksByAuthorResponse {
+    repeated string  name = 1;
+}
+
+/* 
+********** Author **********
+*/
+service Authors {
+    rpc GetAuthorByBook(BookEntity) returns (GetAuthorByBookResponse){}
+
+}
+
+message AuthorEntity{
+    int32 id = 1;
+    string name  = 2;
+
+}
+
+message GetAuthorByBookResponse{
+    string name = 1;
+}
